@@ -29,16 +29,22 @@ public class Stepik {
     }
     private static String printTextPerRole(String[] roles, String[] textLines) {
         StringBuilder answer = new StringBuilder();
-        String subString = new String();
+        String subString;
+        int i;
         for (String role : roles) {
             answer.append( role +":\n" );
+            i=1;
             for (String textLine : textLines) {
                 if (textLine.startsWith( role + ":" )) {
                     subString = textLine.substring( role.length()+2 );
-//                    answer.append(Arrays.asList( textLines ).indexOf(textLine) + 1).append(") ").append(subString).append( "\n" );
-                    answer.append(Arrays.asList( textLines ).indexOf(textLine) + 1).append(") ").append(subString).append( "\n" );
-
-                }
+                    answer.append(i).append(") ").append(subString).append( "\n" );
+//                    answer.append(i);
+//                    answer.append(") ");
+//                    answer.append(subString);
+//                    answer.append("\n");
+//                    System.out.println(i);
+                 }
+             i++;
             }
             answer.append( "\n" );
 
