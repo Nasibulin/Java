@@ -38,23 +38,11 @@ public class Stepik {
                 if (textLine.startsWith( role + ":" )) {
                     subString = textLine.substring( role.length()+2 );
                     answer.append(i).append(") ").append(subString).append( "\n" );
-//                    answer.append(i);
-//                    answer.append(") ");
-//                    answer.append(subString);
-//                    answer.append("\n");
-//                    System.out.println(i);
                  }
              i++;
             }
             answer.append( "\n" );
-
-            //.append(Arrays.asList( textLines ).indexOf(textLine) + 1)
-            //заменил на счетчик i++
-            //.append(i)
-
-
         }
-
         return answer.toString();
     }
 }
