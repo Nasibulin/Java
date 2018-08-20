@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b86005e-6e26-45f2-adcb-aa0db7849547" name="Default" comment="-">
+    <list default="true" id="1b86005e-6e26-45f2-adcb-aa0db7849547" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Stepik.java" afterPath="$PROJECT_DIR$/src/Stepik.java" />
     </list>
     <ignored path="Java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,7 +68,7 @@
       <file leaf-file-name="Stepik.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Stepik.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="46" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.74375">
+            <state line="44" column="46" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.5325">
               <folding />
             </state>
           </provider>
@@ -430,7 +429,11 @@
       <created>1534759889954</created>
       <updated>1534759889954</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="-">
+      <created>1534763898960</created>
+      <updated>1534763898960</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -548,7 +551,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Stepik.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="46" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.74375">
+        <state line="44" column="46" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.5325">
           <folding />
         </state>
       </provider>
