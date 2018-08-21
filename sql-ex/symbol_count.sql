@@ -1,0 +1,1 @@
+SELECT name, LEN(REPLACE(name, 'a', 'aa')) - LEN(name) FROM Ships
