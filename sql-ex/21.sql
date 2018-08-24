@@ -1,0 +1,13 @@
+SELECT  Q_NAME, STUFF(
+  IIF(X&1>0,', 1','')+IIF(X&2>0,', 2','')+
+  IIF(X&4>0,', 3','')+IIF(X&8>0,', 4',''),1,2,'')
+FROM(
+  SELECT Q_ID, Q_NAME,
+    POWER(2,SUM(IIF(V_COLOR='R',B_VOL,0))/64)|
+    POWER(2,SUM(IIF(V_COLOR='G',B_VOL,0))/64)|
+    POWER(2,SUM(IIF(V_COLOR='B',B_VOL,0))/64)X
+  FROM utQ
+    LEFT JOIN utB ON B_Q_ID=Q_ID
+    LEFT JOIN utV ON B_V_ID=V_ID
+  GROUP BY Q_ID, Q_NAME
+)T
