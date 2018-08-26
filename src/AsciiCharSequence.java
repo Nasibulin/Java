@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Konstantin
@@ -28,9 +30,14 @@ public class AsciiCharSequence implements CharSequence {
 
         StringBuilder convertedString = new StringBuilder();
 
-        for(int i=start;i < end;i++){
-            convertedString.append((char) example[i]);
+        for (byte anExample : Arrays.copyOfRange(example,start,end)) {
+            convertedString.append((char) anExample);
         }
+
+
+/*        for(int i=start;i < end;i++){
+            convertedString.append((char) example[i]);
+        }*/
         return convertedString.toString();  //To change body of implemented methods use File | Settings | File Templates.
     }
 
