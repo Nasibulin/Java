@@ -5,98 +5,110 @@
  * Time: 12:34
  * To change this template use File | Settings | File Templates.
  */
-public class Main {
+class Main {
 
     interface TextAnalyzer {
         Label processText(String text);
     }
 
+    enum Label {
+        SPAM, NEGATIVE_TEXT, TOO_LONG, OK
+    }
 
     public Label checkLabels(TextAnalyzer[] analyzers, String text) {
         for(TextAnalyzer analyzer : analyzers){
             Label label = analyzer.processText(text);
-            if(label!=Label.OK)
-                return label.OK;
+            if (label != Label.OK) return label;
+            }
+    return Label.OK;
+    }
+
+    abstract class KeywordAnalyzer implements TextAnalyzer{
+
+        protected abstract String[] getKeywords();
+        protected abstract Label getLabel();
+        @Override
+        public Label processText(String text) {
+            for (String keyword : getKeywords()) {
+                if (text.contains(keyword))
+                    return getLabel();
+            }
+            return Label.OK;
         }
-        return Label.OK;
     }
 
-    public abstract class KeywordAnalyzer implements TextAnalyzer{
-
-        abstract Label getKeywords();
-        abstract Label getLabel();
-
-    }
-    enum Label {
-        SPAM, NEGATIVE_TEXT, TOO_LONG, OK
-    }
-    public class NegativeTextAnalyzer extends KeywordAnalyzer {
+    class NegativeTextAnalyzer extends KeywordAnalyzer {
 
         private String[] keywords={":(","=(",":|"};
-      //  NegativeTextAnalyzer(){};
-
+        //  NegativeTextAnalyzer(){};
+        String text;
         @Override
-        Label getKeywords() {
-            return getLabel();  //To change body of implemented methods use File | Settings | File Templates.
+        protected String[] getKeywords() {
+            return keywords;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
         @Override
-        Label getLabel() {
-            return getLabel();  //To change body of implemented methods use File | Settings | File Templates.
+        protected Label getLabel() {
+            for (String keyword:keywords){
+               if (this.text.contains(keyword)) return Label.NEGATIVE_TEXT;
+             }
+            return Label.OK;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
         public Label processText(String text) {
+            this.text=text;
             return getLabel();  //To change body of implemented methods use File | Settings | File Templates.
         }
 
     }
-    public class TooLongTextAnalyzer implements TextAnalyzer {
+    class TooLongTextAnalyzer implements TextAnalyzer {
 
         private int maxLength;
+        String text;
 
-        TooLongTextAnalyzer(int maxLength) {
+        public TooLongTextAnalyzer(int maxLength) {
             this.maxLength = maxLength;
         }
 
-
-        Label getKeywords() {
-            return getLabel();  //To change body of implemented methods use File | Settings | File Templates.
+        protected String getKeywords() {
+            return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        Label getLabel() {
-            return getLabel();  //To change body of implemented methods use File | Settings | File Templates.
+        protected Label getLabel() {
+            if (this.text.length()>this.maxLength) return Label.TOO_LONG;
+            else return Label.OK;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
         public Label processText(String text){
-
+            this.text=text;
             return getLabel();
+
         }
 
     }
-    public class SpamAnalyzer extends KeywordAnalyzer {
+    class SpamAnalyzer extends KeywordAnalyzer{
 
         private String[] keywords;
-
+        String text;
         SpamAnalyzer(String[] keywords) {
             this.keywords = keywords;
         }
 
-
-        SpamAnalyzer() {
-            //To change body of implemented methods use File | Settings | File Templates.
+        @Override
+        protected String[] getKeywords() {
+            return keywords;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
         @Override
-        Label getKeywords() {
-            return getLabel();  //To change body of implemented methods use File | Settings | File Templates.
-        }
-
-        @Override
-        Label getLabel() {
-            return getLabel();  //To change body of implemented methods use File | Settings | File Templates.
+        protected Label getLabel() {
+            for (String keyword:keywords){
+                if (this.text.contains(keyword)) return Label.SPAM;
+            }
+            return Label.OK;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
         public Label processText(String text) {
+            this.text=text;
             return getLabel();  //To change body of implemented methods use File | Settings | File Templates.
         }
     }
