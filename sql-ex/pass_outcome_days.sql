@@ -1,34 +1,46 @@
 WITH s1
      AS (SELECT id_psg,
-                (DATEPART (dw, date) - DATEPART (dw, '20180819') % 7) day
-           FROM Pass_in_trip),
-     s2
-     AS (SELECT id_psg, day, count (day) OVER (PARTITION BY id_psg) cnt
-           FROM s1),
-     s3
-     AS (SELECT id_psg,
                 day,
-                count (day) day_cnt,
-                cnt all_cnt
-           FROM s2
-         GROUP BY id_psg, day, cnt),
-     s4
-     AS (SELECT DISTINCT p.id_psg
-           FROM s3 JOIN passenger p ON s3.id_psg = p.id_psg
-          WHERE    day NOT IN (6, 7)
-                OR (day IN (6, 7) AND day_cnt < (all_cnt - day_cnt))),
-     in_
-     AS (SELECT id_psg,
-                (  datepart (dw, date + iif (time_out < time_in, 0, 1))
-                 - DATEPART (dw, '20180819') % 7)
-                   day
-           FROM trip JOIN Pass_in_trip ON Pass_in_trip.trip_no = Trip.trip_no),
-     all_
-     AS (SELECT in_.id_psg, count (in_.day) cnt
-           FROM in_
-          WHERE (in_.day = 1 AND id_psg IN (SELECT id_psg FROM s4))
-         GROUP BY in_.id_psg)
-
+                count (day) cnt1,
+                cnt
+           FROM (SELECT id_psg,
+                        day,
+                        count (day) OVER (PARTITION BY id_psg) cnt
+                   FROM (SELECT id_psg, DATEPART (dw, date) day
+                           FROM Pass_in_trip) s) s
+         GROUP BY id_psg, day, cnt
+         HAVING    (    day IN
+                           (DATEPART (dw, '20180825'),
+                            DATEPART (dw, '20180826'))
+                    AND count (day) * 1.0 / cnt <
+                           (cnt - count (day)) * 1.0 / cnt)
+                OR (day NOT IN
+                       (DATEPART (dw, '20180825'), DATEPART (dw, '20180826')))),
+     s2
+     AS (SELECT id_psg, day_in, (count (day_in) * 1.0 / cnt) freq
+           FROM (SELECT id_psg,
+                        day_in,
+                        count (day_in) OVER (PARTITION BY day_in) cnt
+                   FROM (SELECT id_psg,
+                                datepart (
+                                   dw,
+                                   date + iif (time_out < time_in, 0, 1))
+                                   day_in
+                           FROM trip
+                                JOIN Pass_in_trip
+                                   ON Pass_in_trip.trip_no = Trip.trip_no
+                          WHERE id_psg IN (SELECT id_psg FROM s1)) s) s
+         GROUP BY id_psg, day_in, cnt
+         HAVING day_in = DATEPART (dw, '20180820'))
 SELECT name
-  FROM all_ join Passenger p on p.ID_psg=all_.id_psg
- WHERE cnt IN (SELECT max (cnt) FROM all_)
+  FROM (SELECT s1.id_psg
+          FROM s1
+         WHERE NOT EXISTS (SELECT * FROM s2)
+        UNION
+        SELECT s2.id_psg
+          FROM s2
+         WHERE (   freq > (SELECT max (freq)
+                             FROM s2
+                            WHERE id_psg <> s2.id_psg)
+                OR (SELECT count (DISTINCT freq) FROM s2) = 1)) x
+       JOIN Passenger p ON p.id_psg = x.id_psg
