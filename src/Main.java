@@ -50,7 +50,7 @@ class Main {
         @Override
         protected Label getLabel() {
             for (String keyword:keywords){
-               if (this.text.contains(keyword)) return Label.NEGATIVE_TEXT;
+               if (text.contains(keyword)) return Label.NEGATIVE_TEXT;
              }
             return Label.OK;  //To change body of implemented methods use File | Settings | File Templates.
         }
@@ -75,7 +75,7 @@ class Main {
         }
 
         protected Label getLabel() {
-            if (this.text.length()>this.maxLength) return Label.TOO_LONG;
+            if (text.length()>maxLength) return Label.TOO_LONG;
             else return Label.OK;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
@@ -102,7 +102,7 @@ class Main {
         @Override
         protected Label getLabel() {
             for (String keyword:keywords){
-                if (this.text.contains(keyword)) return Label.SPAM;
+                if (text.contains(keyword)) return Label.SPAM;
             }
             return Label.OK;  //To change body of implemented methods use File | Settings | File Templates.
         }
@@ -172,7 +172,7 @@ class Main {
             System.out.println(test);
             for (TextAnalyzer[] analyzers : textAnalyzers) {
                 System.out.print(numberOfAnalyzer + ": ");
-                System.out.println(this.checkLabels(analyzers, test));
+                System.out.println(checkLabels(analyzers, test));
                 numberOfAnalyzer++;
             }
             numberOfTest++;

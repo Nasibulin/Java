@@ -11,15 +11,8 @@ import java.util.Locale;
 public class Stepik {
 
     public static void main(String[] args) {
-        class Vehicle{
-            int mpg;
-        }
-    Vehicle car1 = new Vehicle();
-    Vehicle car2=car1;
-
-        car1.mpg=25;
-                    System.out.println(car1.mpg);
-                    System.out.println(car2.mpg);
+        double a = 2.0 - 1.1;
+        System.out.println(a);
 
     }
 
