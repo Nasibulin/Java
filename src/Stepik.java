@@ -11,8 +11,12 @@ import java.util.Locale;
 public class Stepik {
 
     public static void main(String[] args) {
-        double a = 2.0 - 1.1;
-        System.out.println(a);
+
+      Long i=1L;
+      System.out.println(i.equals(546565645^(546565645^i)));
+
+      //  double a = 2.0 - 1.1;
+      //  System.out.println(a);
 
     }
 
