@@ -1,5 +1,5 @@
 import java.math.BigInteger;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,16 +10,30 @@ import java.util.Locale;
  */
 public class Stepik {
 
-    public static void main(String[] args) {
-
-      Long i=1L;
-      System.out.println(i.equals(546565645^(546565645^i)));
+    public static void main(String[] args){
+       System.out.println(getCallerClassAndMethodName());
+       sqrt(100.0);
+       // System.out.println(tracer.replaceAll("\\(+\\s*([^\\s)]+)\\s*\\)+",""));
+      //Long i=1L;
+      //System.out.println(i.equals(546565645^(546565645^i)));
 
       //  double a = 2.0 - 1.1;
       //  System.out.println(a);
 
     }
+    public static String getCallerClassAndMethodName() {
+        StackTraceElement[] tracer;
+        tracer = new Throwable().getStackTrace();
+        //System.out.print(tracer.length);
+        if (tracer.length>2 ) {return tracer[2].getClassName()+"#"+tracer[2].getMethodName();}
+        else return null;
+    }
+    public static double sqrt(double x) {
 
+        System.out.println(getCallerClassAndMethodName());
+
+        return Math.sqrt(x); // your implementation here
+    }
 
 
     private static String printTextPerRole(String[] roles, String[] textLines) {
