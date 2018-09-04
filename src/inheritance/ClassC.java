@@ -8,4 +8,9 @@ package inheritance;
  * To change this template use File | Settings | File Templates.
  */
 public class ClassC {
+    public void methodC(){
+    }
+     public void test(){
+
+     }
 }

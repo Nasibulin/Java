@@ -7,5 +7,10 @@ package inheritance;
  * Time: 8:16
  * To change this template use File | Settings | File Templates.
  */
-public class ClassD {
+public class ClassD extends ClassC {
+
+    public void test(){
+        //return 0;
+    }
+
 }
