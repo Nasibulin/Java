@@ -7,5 +7,9 @@ package NewRobot;
  * Time: 9:33
  * To change this template use File | Settings | File Templates.
  */
-public class RobotConnectionManager {
+public class RobotConnectionManager implements IfaceRobotConnectionManager {
+    @Override
+    public RobotConnection getConnection() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

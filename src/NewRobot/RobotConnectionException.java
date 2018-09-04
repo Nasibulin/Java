@@ -7,5 +7,14 @@ package NewRobot;
  * Time: 15:27
  * To change this template use File | Settings | File Templates.
  */
-public class RobotConnectionException {
+public class RobotConnectionException extends RuntimeException {
+
+    public RobotConnectionException(String message) {
+        super(message);
+
+    }
+
+    public RobotConnectionException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
