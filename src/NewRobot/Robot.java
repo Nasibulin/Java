@@ -1,5 +1,11 @@
 package NewRobot;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.XMLFormatter;
+
+
 /**
  * Created with IntelliJ IDEA.
  * User: Nasibulin
@@ -18,6 +24,33 @@ public class Robot {
     }
 
     private static void configureLogging() {
+        Logger loggerA = Logger.getLogger("org.stepic.java.logging.ClassA");
+        Logger loggerB = Logger.getLogger("org.stepic.java.logging.ClassB");
+        Logger loggerC = Logger.getLogger("org.stepic.java");
+        loggerC.setUseParentHandlers(false);
+
+        loggerA.setLevel(Level.ALL);
+        loggerB.setLevel(Level.WARNING);
+        loggerC.setLevel(Level.ALL);
+
+        ConsoleHandler handlerA = new ConsoleHandler();
+        ConsoleHandler handlerB = new ConsoleHandler();
+        ConsoleHandler handlerC = new ConsoleHandler();
+
+
+        handlerA.setFormatter(new XMLFormatter());
+        handlerA.setLevel(Level.ALL);
+
+
+        handlerB.setFormatter(new XMLFormatter());
+        handlerB.setLevel(Level.WARNING);
+
+        handlerC.setFormatter(new XMLFormatter());
+        handlerC.setLevel(Level.ALL);
+
+        loggerA.addHandler(handlerA);
+        loggerB.addHandler(handlerB);
+        loggerC.addHandler(handlerC);
 
 
         // your implementation here
