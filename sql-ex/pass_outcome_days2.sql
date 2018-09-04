@@ -33,14 +33,13 @@ WITH s1
          GROUP BY id_psg, day_in, cnt
          HAVING day_in = DATEPART (dw, '20180820'))
 SELECT name
-  FROM (SELECT s1.id_psg
-          FROM s1
-         WHERE NOT EXISTS (SELECT * FROM s2)
-        UNION
-        SELECT s2.id_psg
+  FROM (SELECT s2.id_psg
           FROM s2
-         WHERE (   freq > (SELECT max (freq)
+         WHERE    (freq > (SELECT max (freq)
                              FROM s2
-                            WHERE id_psg <> s2.id_psg)
-                OR (SELECT count (DISTINCT freq) FROM s2) = 1)) x
+                            WHERE id_psg <> s2.id_psg))
+               OR EXISTS
+                     (SELECT *
+                        FROM s2
+                       WHERE id_psg <> s2.id_psg)) x
        JOIN Passenger p ON p.id_psg = x.id_psg
