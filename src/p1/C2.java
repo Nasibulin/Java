@@ -7,5 +7,6 @@ package p1;
  * Time: 8:55
  * To change this template use File | Settings | File Templates.
  */
-public class C2 {
+public class C2 extends C1 {
+    int m() {return 2;}
 }
