@@ -1,5 +1,5 @@
-import java.util.logging.*;
 package NewRobot;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Nasibulin
