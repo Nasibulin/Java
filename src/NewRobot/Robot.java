@@ -1,5 +1,5 @@
+import java.util.logging.*;
 package NewRobot;
-import java.io.*;
 /**
  * Created with IntelliJ IDEA.
  * User: Nasibulin
@@ -15,6 +15,12 @@ public class Robot {
             System.out.println(attempt);
         }
         //
+    }
+
+    private static void configureLogging() {
+
+
+        // your implementation here
     }
 
     public static void moveRobot(RobotConnectionManager robotConnectionManager, int toX, int toY) {
