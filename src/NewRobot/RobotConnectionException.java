@@ -1,4 +1,4 @@
-package NewRobot;
+package newrobot;
 
 /**
  * Created with IntelliJ IDEA.

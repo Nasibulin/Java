@@ -1,4 +1,4 @@
-package NewRobot;
+package newrobot;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
