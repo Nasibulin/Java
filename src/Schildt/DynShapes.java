@@ -1,4 +1,4 @@
-package Schildt;
+package schildt;
 
 /**
  * Created with IntelliJ IDEA.
