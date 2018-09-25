@@ -48,8 +48,8 @@ public class Robot {
         handlerC.setFormatter(new XMLFormatter());
         handlerC.setLevel(Level.ALL);
 
-        loggerA.addHandler(handlerA);
-        loggerB.addHandler(handlerB);
+//        loggerA.addHandler(handlerA);
+//        loggerB.addHandler(handlerB);
         loggerC.addHandler(handlerC);
 
 
