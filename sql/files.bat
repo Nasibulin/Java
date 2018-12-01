@@ -1,0 +1,1 @@
+for /l %%a in (1,1,25) do fsutil file createnew 0%%a.sql 0
